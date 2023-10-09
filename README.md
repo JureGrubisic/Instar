@@ -1,2 +1,2 @@
-# Instar
-Instar Informatika shop
+# Pc Shop
+Pc Shop
