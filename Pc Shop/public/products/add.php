@@ -1,1 +1,1 @@
-https://github.com/JureGrubisic/Instar
+https://github.com/JureGrubisic/Pc-Shop.git
