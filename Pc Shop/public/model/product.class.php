@@ -18,27 +18,30 @@ class Product{
         $sql="DELETE FROM products WHERE ID=".$id;
         return mysqli_query($conn, $sql);
     }
-    public static function saveProduct($korisnik){
+    public static function saveProduct($data){
         global $conn;
+    
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $brand=$_POST['brand'];
-            $model=$_POST['model'];
-            $price=$_POST['price'];
-            $screen=$_POST['screen'];
-            $ram=$_POST['ram'];
-            $hard_disc=$_POST['hard_disc'];
-            $processor=$_POST['processor'];
-            $model_processor=$_POST['model_processor'];
-            $graphic_card=$_POST['graphic_card'];
-            $model_graphic_card=$_POST['model_graphic_card'];
-            $os=$_POST['os'];
-            $weight=$_POST['weight'];
-            $guarantee=$_POST['guarantee'];
-            $target='../assets/laptops/'.basename($_FILES['image']['name']);
-            $image=$_FILES['image']['name'];
-            if(move_uploaded_file($_FILES['image']['tmp_name'],$target)){
-                $sql="INSERT INTO products VALUES (null,'".$brand."','".$model."','".$price."','".$screen."','".$ram."','".$processor."','".$model_processor."','".$hard_disc."','".$graphic_card."','".$model_graphic_card."','".$os."','".$weight."','".$guarantee."','assets/laptops/".$image."')";
-                mysqli_query($conn,$sql);
+            $brand = mysqli_real_escape_string($conn, $data['brand']);
+            $model = mysqli_real_escape_string($conn, $data['model']);
+            $price = mysqli_real_escape_string($conn, $data['price']);
+            $screen = mysqli_real_escape_string($conn, $data['screen']);
+            $ram = mysqli_real_escape_string($conn, $data['ram']);
+            $hard_disc = mysqli_real_escape_string($conn, $data['hard_disc']);
+            $processor = mysqli_real_escape_string($conn, $data['processor']);
+            $model_processor = mysqli_real_escape_string($conn, $data['model_processor']);
+            $graphic_card = mysqli_real_escape_string($conn, $data['graphic_card']);
+            $model_graphic_card = mysqli_real_escape_string($conn, $data['model_graphic_card']);
+            $os = mysqli_real_escape_string($conn, $data['os']);
+            $weight = mysqli_real_escape_string($conn, $data['weight']);
+            $guarantee = mysqli_real_escape_string($conn, $data['guarantee']);
+            
+            $image = $_FILES['image']['name'];
+            $target = '../assets/laptops/' . basename($image);
+    
+            if(move_uploaded_file($_FILES['image']['tmp_name'], $target)){
+                $sql = "INSERT INTO products (brand, model, price, screen, ram, processor, model_processor, hard_disc, graphic_card, model_graphic_card, os, weight, guarantee, image_path) VALUES ('$brand', '$model', '$price', '$screen', '$ram', '$processor', '$model_processor', '$hard_disc', '$graphic_card', '$model_graphic_card', '$os', '$weight', '$guarantee', 'assets/laptops/$image')";
+                mysqli_query($conn, $sql);
             }
         }
     }
