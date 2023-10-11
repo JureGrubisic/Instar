@@ -1,7 +1,7 @@
 <?php
     $conn=$hostname = 'localhost'; 
-    $username = 'root';
-    $password = '';
+    $username = 'pzi132023';
+    $password = 'csdigital2023';
     $database = 'pzi132023'; 
     $port = 3306;
     
